@@ -57,11 +57,12 @@ namespace CustomArray
         /// <param name="length">Length</param>         
         public CustomArray(int first, int length)
         {
+            if (length <= 0) throw new ArgumentException();
             First = first;
             Length = length;
             customArray = new T[] { };
             System.Array.Resize(ref customArray, length);
-            position = First - 1;
+            Reset();
         }
 
 
@@ -74,21 +75,31 @@ namespace CustomArray
         /// <exception cref="ArgumentException">Thrown when count is smaler than 0</exception>
         public CustomArray(int first, IEnumerable<T> list)
         {
-            if (list == null) throw new NullReferenceException();
+            if (list is null) 
+                throw new NullReferenceException("CustomArray can't be created with null array");
+
+            bool listWithoutElements = true;
+
+            foreach(var item in list)
+            {
+                listWithoutElements = false;
+                break;
+            }
+
+            if (listWithoutElements)
+                throw new ArgumentException("CustomArray can't be created with list without elements ");
+
             this.first = first;
-            customArray = new T[] { };
-            int size = 0;
+            customArray = new T[] { };            
+            int counter = -1;
             foreach(T item in list)
             {
-                size++;
-                System.Array.Resize(ref customArray, size);
-                customArray[size - 1] = item;
-                // зачем, если это же исключение всплывает при установке свойства?
-                // нет и не будет таких обстоятельств когда Length установится в значение меньше 0
-                if (size < 0) throw new ArgumentException();
-                Length = size;
+                counter++;
+                System.Array.Resize(ref customArray, counter+1);
+                customArray[counter] = item;
             }
-            position = First - 1;
+            Length = customArray.Length;
+            Reset();
         }
 
         /// <summary>
@@ -98,9 +109,14 @@ namespace CustomArray
         /// <param name="list">Params</param>
         ///  <exception cref="ArgumentNullException">Thrown when list is null</exception>
         /// <exception cref="ArgumentException">Thrown when list without elements </exception>
-        public CustomArray(int first, params T[] list) : this(first, list as IEnumerable<T>)
+        public CustomArray(int first, params T[] list) 
         {
-            
+            if (list is null) throw new ArgumentNullException();
+            if (list.Length == 0) throw new ArgumentException();
+            this.first = first;
+            customArray = list;
+            Length = customArray.Length;
+            Reset();
         }
 
         /// <summary>
@@ -113,19 +129,15 @@ namespace CustomArray
         public T this[int index]
         {
             get
-            {                
-                try
-                {
-                    if (customArray[index - First] == null) throw new ArgumentNullException();
-                    return customArray[index - First];
-                }
-                catch
-                {
+            {
+                if(index < First || index > Last)
                     throw new ArgumentException();
-                }
+                
+                return customArray[index - First];
             }
             set
             {
+                if (value is null) throw new ArgumentNullException();
                 try
                 {
                     customArray[index - First] = value;

@@ -44,6 +44,13 @@ namespace CustomArray.MyPoorManTests
             }
 
             Console.ReadKey();
+
+            Console.WriteLine(new string('-', 50));
+
+            int[] lst = null;
+            CustomArray<int> errorArray = new CustomArray<int>(-5, lst);
+
+            Console.ReadKey();
         }
     }
 }

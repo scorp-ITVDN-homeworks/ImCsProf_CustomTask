@@ -105,176 +105,177 @@ namespace CustomArray.Tests
 
         //TODO: Uncomment this if you want to check your task for advanced unit tests
 
-        //#region Advanced
-        //[Test]
-        //public void CreateCustomArray_WithNullArray_ShoulThrowArgumentNullException()
-        //{
-        //    //arrange
-        //    int first = 1;
-        //    int[] array = null;
-        //    var expectedEx = typeof(ArgumentNullException);
-        //    //act
-        //    var actEx = Assert.Catch(() => new CustomArray<int>(first, array));
-        //    //assert
-        //    Assert.AreEqual(expectedEx, actEx.GetType(),
-        //        message: "CustomArray can't be created with null array");
+        #region Advanced
 
-        //}
+        [Test]
+        public void CreateCustomArray_WithNullArray_ShoulThrowArgumentNullException()
+        {
+            //arrange
+            int first = 1;
+            int[] array = null;
+            var expectedEx = typeof(ArgumentNullException);
+            //act
+            var actEx = Assert.Catch(() => new CustomArray<int>(first, array));
+            //assert
+            Assert.AreEqual(expectedEx, actEx.GetType(),
+                message: "CustomArray can't be created with null array");
 
-        //[Test]
-        //public void CreateCustomArray_WithEmptyArray_ShoulThrowArgumentException()
-        //{
-        //    //arrange
-        //    int first = 1;
-        //    int[] array = new int[] { };
-        //    var expectedEx = typeof(ArgumentException);
-        //    //act
-        //    var actEx = Assert.Catch(() => new CustomArray<int>(first, array));
-        //    //assert
-        //    Assert.AreEqual(expectedEx, actEx.GetType(),
-        //        message: "CustomArray can't be created with null array");
+        }
 
-        //}
+        [Test]
+        public void CreateCustomArray_WithEmptyArray_ShoulThrowArgumentException()
+        {
+            //arrange
+            int first = 1;
+            int[] array = new int[] { };
+            var expectedEx = typeof(ArgumentException);
+            //act
+            var actEx = Assert.Catch(() => new CustomArray<int>(first, array));
+            //assert
+            Assert.AreEqual(expectedEx, actEx.GetType(),
+                message: "CustomArray can't be created with null array");
 
-        //[TestCase(0)]
-        //[TestCase(-8)]
-        //[TestCase(-4)]
-        //public void Length_SetElementLessThan0_ShouldThrowArgumentException(int length)
-        //{
-        //    //Arrange
-        //    int first = 3;
-        //    var expectedEx = typeof(ArgumentException);
-        //    //Act
-        //    var actEx = Assert.Catch(() => { var custom = new CustomArray<int>(first, length); });
-        //    //Assert
-        //    Assert.AreEqual(expectedEx, actEx.GetType(),
-        //        message: "Set property in Length should throw ArgumentException in case of length parameter smaller or equal 0  ");
+        }
 
-        //}
+        [TestCase(0)]
+        [TestCase(-8)]
+        [TestCase(-4)]
+        public void Length_SetElementLessThan0_ShouldThrowArgumentException(int length)
+        {
+            //Arrange
+            int first = 3;
+            var expectedEx = typeof(ArgumentException);
+            //Act
+            var actEx = Assert.Catch(() => { var custom = new CustomArray<int>(first, length); });
+            //Assert
+            Assert.AreEqual(expectedEx, actEx.GetType(),
+                message: "Set property in Length should throw ArgumentException in case of length parameter smaller or equal 0  ");
 
-        //[TestCase(4, 6, 3)]
-        //[TestCase(0, 11, 11)]
-        //[TestCase(-8, 3, -5)]
-        //public void Indexer_SetElementOutOfRange_ShouldThrowArgumentException(int first, int length, int index)
-        //{
-        //    //Arrange
-        //    int value = -5;
-        //    //Act
-        //    var custom = new CustomArray<int>(first, length);
+        }
 
-        //    //Assert
-        //    Assert.Throws<ArgumentException>(() => custom[index] = value, message: "Indexer  should throw ArgumentException ,if index parameter  out of array range");
+        [TestCase(4, 6, 3)]
+        [TestCase(0, 11, 11)]
+        [TestCase(-8, 3, -5)]
+        public void Indexer_SetElementOutOfRange_ShouldThrowArgumentException(int first, int length, int index)
+        {
+            //Arrange
+            int value = -5;
+            //Act
+            var custom = new CustomArray<int>(first, length);
 
-
-        //}
-
-        //[TestCase(-6, 4, -9)]
-        //[TestCase(0, 3, 7)]
-        //[TestCase(9, 17, 5)]
-        //public void Indexer_GetElementOutOfRange_ShouldThrowArgumentException(int first, int length, int index)
-        //{
-        //    //Arrange
-        //    var custom = new CustomArray<int>(first, length);
-        //    int result = 0;
-        //    //Act -Assert 
-        //    var actEx = Assert.Throws<ArgumentException>(() => result = custom[index], message: "Set indexer works incorrect");
-
-        //}
-
-        //[Test]
-        //public void Indexer_WithNullValue_ShouldThrowArgumentNullException()
-        //{
-        //    //arrange
-        //    int first = 1;
-        //    int length = 7;
-        //    string value = null;
-        //    int index = 5;
-        //    var custom = new CustomArray<string>(first, length);
-
-        //    //act &assert 
-        //    Assert.Throws<ArgumentNullException>(() => custom[index] = value, message: "Indexer set not throw exception if value is null ");
-        //}
+            //Assert
+            Assert.Throws<ArgumentException>(() => custom[index] = value, message: "Indexer  should throw ArgumentException ,if index parameter  out of array range");
 
 
-        //[Test]
-        //public void CreateCustomArray_WithListWithoutParams_ShouldThrowArgumentException()
-        //{
-        //    //Arrange
-        //    int first = 4;
-        //    List<int> list = new List<int>();
-        //    var expectedEx = typeof(ArgumentException);
-        //    //Act
-        //    var actEx = Assert.Catch(() => { var custom = new CustomArray<int>(first, list); });
-        //    //Arrange
-        //    Assert.AreEqual(expectedEx, actEx.GetType(),
-        //        message: "CustomArray can't be created with list without elements ");
+        }
 
-        //}
+        [TestCase(-6, 4, -9)]
+        [TestCase(0, 3, 7)]
+        [TestCase(9, 17, 5)]
+        public void Indexer_GetElementOutOfRange_ShouldThrowArgumentException(int first, int length, int index)
+        {
+            //Arrange
+            var custom = new CustomArray<int>(first, length);
+            int result = 0;
+            //Act -Assert 
+            var actEx = Assert.Throws<ArgumentException>(() => result = custom[index], message: "Set indexer works incorrect");
 
-        //[Test]
-        //public void CreateCustomArray_WithListNull_ShouldThrowNullReferenceException()
-        //{
-        //    //Arrange
-        //    int first = 1;
-        //    List<int> list = null;
-        //    var expectedEx = typeof(NullReferenceException);
-        //    //Act
-        //    var actEx = Assert.Catch(() => { var custom = new CustomArray<int>(first, list); });
-        //    //Arrange
-        //    Assert.AreEqual(expectedEx, actEx.GetType(),
-        //        message: "CustomArray can't be created with null list ");
+        }
 
-        //}
+        [Test]
+        public void Indexer_WithNullValue_ShouldThrowArgumentNullException()
+        {
+            //arrange
+            int first = 1;
+            int length = 7;
+            string value = null;
+            int index = 5;
+            var custom = new CustomArray<string>(first, length);
+
+            //act &assert 
+            Assert.Throws<ArgumentNullException>(() => custom[index] = value, message: "Indexer set not throw exception if value is null ");
+        }
 
 
-        //[Test]
-        //public void GetEnumerator_OfListAndCustomArray_ShouldHaveEqualElements()
-        //{
-        //    List<int> list = new List<int>()
-        //    {
-        //        5,10,14
-        //    };
+        [Test]
+        public void CreateCustomArray_WithListWithoutParams_ShouldThrowArgumentException()
+        {
+            //Arrange
+            int first = 4;
+            List<int> list = new List<int>();
+            var expectedEx = typeof(ArgumentException);
+            //Act
+            var actEx = Assert.Catch(() => { var custom = new CustomArray<int>(first, list); });
+            //Arrange
+            Assert.AreEqual(expectedEx, actEx.GetType(),
+                message: "CustomArray can't be created with list without elements ");
 
-        //    int first = 7;
-        //    CustomArray<int> array = new CustomArray<int>(first, list);
+        }
 
-        //    var en2 = list.GetEnumerator();
-        //    var en = array.GetEnumerator();
-        //    for (int i = 0; i < array.Length; i++)
-        //    {
-        //        if (en.MoveNext() && en2.MoveNext())
-        //        {
-        //            Assert.AreEqual(en.Current, en2.Current, message: "GetEnumerator works incorretly ");
-        //        }
-        //    }
+        [Test]
+        public void CreateCustomArray_WithListNull_ShouldThrowNullReferenceException()
+        {
+            //Arrange
+            int first = 1;
+            List<int> list = null;
+            var expectedEx = typeof(NullReferenceException);
+            //Act
+            var actEx = Assert.Catch(() => { var custom = new CustomArray<int>(first, list); });
+            //Arrange
+            Assert.AreEqual(expectedEx, actEx.GetType(),
+                message: "CustomArray can't be created with null list ");
 
-        //}
+        }
 
-        //[Test]
-        //public void GetEnumerator_UsingIEnumerableExplicitlyOfListAndCustomArray_ShouldHaveEqualElements()
-        //{
-        //    //Arrange
 
-        //    List<int> expected_list = new List<int>()
-        //    {
-        //        5,10,14
-        //    };
-        //    int first = 7;
-        //    List<int> actual = new List<int>();
+        [Test]
+        public void GetEnumerator_OfListAndCustomArray_ShouldHaveEqualElements()
+        {
+            List<int> list = new List<int>()
+            {
+                5,10,14
+            };
 
-        //    //Act
-        //    CustomArray<int> array = new CustomArray<int>(first, expected_list);
-        //    IEnumerable enumerable = array;
+            int first = 7;
+            CustomArray<int> array = new CustomArray<int>(first, list);
 
-        //    //Assert
-        //    foreach (var item in enumerable)
-        //    {
-        //        actual.Add((int)item);
-        //    }
-        //    Assert.AreEqual(expected_list, actual);
+            var en2 = list.GetEnumerator();
+            var en = array.GetEnumerator();
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (en.MoveNext() && en2.MoveNext())
+                {
+                    Assert.AreEqual(en.Current, en2.Current, message: "GetEnumerator works incorretly ");
+                }
+            }
 
-        //}
-        //#endregion
+        }
+
+        [Test]
+        public void GetEnumerator_UsingIEnumerableExplicitlyOfListAndCustomArray_ShouldHaveEqualElements()
+        {
+            //Arrange
+
+            List<int> expected_list = new List<int>()
+            {
+                5,10,14
+            };
+            int first = 7;
+            List<int> actual = new List<int>();
+
+            //Act
+            CustomArray<int> array = new CustomArray<int>(first, expected_list);
+            IEnumerable enumerable = array;
+
+            //Assert
+            foreach (var item in enumerable)
+            {
+                actual.Add((int)item);
+            }
+            Assert.AreEqual(expected_list, actual);
+
+        }
+        #endregion
 
     }
 }
